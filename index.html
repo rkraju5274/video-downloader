@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Video Downloader</title>
+</head>
+<body>
+  <h2>🎬 Video Downloader</h2>
+  <input type="text" id="videoURL" placeholder="Video URL डालें">
+  <button onclick="download()">Download</button>
+  <div id="result"></div>
+
+  <script>
+    async function download() {
+      const url = document.getElementById("videoURL").value;
+      const res = await fetch("http://localhost:3000/download", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url })
+      });
+
+      const data = await res.text();
+      document.getElementById("result").innerHTML = data;
+    }
+  </script>
+</body>
+</html>
